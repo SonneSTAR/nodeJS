@@ -32,10 +32,8 @@ const server = http
 
             let data = JSON.parse(fs.readFileSync("deportes.json", "utf8"));
 
-            console.log(data)
-
             let deportes = data.deportes
-            console.log(deportes)
+
 
             deportes.push(deporte)
 
@@ -48,7 +46,7 @@ const server = http
         if (req.url.startsWith("/deportes")) {
             let deportes = []
             deportesJSON = JSON.parse(fs.readFileSync("deportes.json", "utf8"));
-            console.log(JSON.stringify(deportesJSON))
+
 
 
             res.end(JSON.stringify(deportesJSON))
