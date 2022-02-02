@@ -50,7 +50,7 @@ const server = http
             deportesJSON = JSON.parse(fs.readFileSync("deportes.json", "utf8"));
             console.log(JSON.stringify(deportesJSON))
 
-            //ES RES.END NO RETURN.
+
             res.end(JSON.stringify(deportesJSON))
 
             res.end();
@@ -70,7 +70,7 @@ const server = http
         }
 
 
-        //PUT, este no cache como hacerlo./UPDATE
+        //UPDATE
         if (req.url.startsWith("/editar")) {
             
             const { nombre, precio } = url.parse(req.url, true).query;
