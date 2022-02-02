@@ -21,7 +21,7 @@ const server = http
                 res.end(html)
             })
         }
-
+        //AGREGAR/
         if (req.url.startsWith("/agregar")) {
             const { nombre, precio } = url.parse(req.url, true).query;
 
@@ -32,9 +32,10 @@ const server = http
 
             let data = JSON.parse(fs.readFileSync("deportes.json", "utf8"));
 
+            console.log(data)
 
             let deportes = data.deportes
-
+            console.log(deportes)
 
             deportes.push(deporte)
 
@@ -43,20 +44,20 @@ const server = http
             res.end();
         }
 
-
+        //POST / READ
         if (req.url.startsWith("/deportes")) {
             let deportes = []
             deportesJSON = JSON.parse(fs.readFileSync("deportes.json", "utf8"));
+            console.log(JSON.stringify(deportesJSON))
 
-
+            //ES RES.END NO RETURN.
             res.end(JSON.stringify(deportesJSON))
 
             res.end();
 
-
         }
 
-
+        //DELETE 
         if (req.url.startsWith("/eliminar")) {
             const { nombre } = url.parse(req.url, true).query;
 
@@ -69,8 +70,25 @@ const server = http
         }
 
 
-        
-        
+        //PUT, este no cache como hacerlo./UPDATE
+        if (req.url.startsWith("/editar")) {
+            
+            const { nombre, precio } = url.parse(req.url, true).query;
+
+            //
+            deportesJSON.deportes = deportes.map((b) => {
+                if(b.nombre === nombre){
+                    return {
+                        nombre: nombre,
+                        precio: precio,
+                    };
+                    
+                }
+                return b;
+            })
+            fs.writeFileSync("deportes.json", JSON.stringify(deportesJSON));
+            res.end();
+        }
 
         
 

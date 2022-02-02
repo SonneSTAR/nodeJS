@@ -56,7 +56,9 @@
 
 
 
-
+<div action="http://localhost:3000/deportes" class="border rounded p-4">
+  <button class="btn btn-info" onclick="getData()">Listar</button>
+</div>
 
 
 
@@ -92,7 +94,9 @@
           <td>${d.nombre}</td>
           <td>${d.precio}</td>
           <td>
-        
+            <button class="btn btn-warning" onclick='preEdit("${d.nombre}","${
+          d.precio
+        }")' data-toggle="modal" data-target="#exampleModal">Editar</button>
             <button class="btn btn-danger" onclick='eliminar("${d.nombre}")'>Eliminar</button>
           </td>
         </tr>
@@ -110,6 +114,17 @@
     let nombre = $('#nombre').val()
     let precio = $('#precio').val()
     axios.get(`http://localhost:3000/agregar?nombre=${nombre}&precio=${precio}`).then((data) => {
+      alert(data.data)
+      getData()
+    })
+    $('#exampleModal').modal('hide')
+  }
+
+  function edit() {
+    let nombre = $('#nombreModal').val()
+    let precio = $('#precioModal').val()
+    axios.get(`http://localhost:3000/editar?nombre=${nombre}&precio=${precio}`).then((data) => {
+      alert(data.data)
       getData()
     })
     $('#exampleModal').modal('hide')
@@ -117,6 +132,7 @@
 
   function eliminar(nombre) {
     axios.get(`http://localhost:3000/eliminar?nombre=${nombre}`).then((data) => {
+      alert(data.data)
       getData()
     })
     $('#exampleModal').modal('hide')
@@ -148,6 +164,8 @@
             <input id="precioModal" type="text" class="form-control" precio="precio" />
           </div>
         </div>
+
+        <button class="btn btn-warning" onclick="edit()">Editar</button>
       </div>
     </div>
   </div>
