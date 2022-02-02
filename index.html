@@ -79,7 +79,6 @@
   function getData() {
     $('#cuerpo').html('')
     axios.get('http://localhost:3000/deportes').then((data) => {
-      console.log(data)
       let deportes = data.data.deportes
       deportes.forEach((d, i) => {
         $('#cuerpo').append(`
@@ -108,7 +107,6 @@
     let nombre = $('#nombre').val()
     let precio = $('#precio').val()
     axios.get(`http://localhost:3000/agregar?nombre=${nombre}&precio=${precio}`).then((data) => {
-      alert(data.data)
       getData()
     })
     $('#exampleModal').modal('hide')
@@ -118,7 +116,6 @@
     let nombre = $('#nombreModal').val()
     let precio = $('#precioModal').val()
     axios.get(`http://localhost:3000/editar?nombre=${nombre}&precio=${precio}`).then((data) => {
-      alert(data.data)
       getData()
     })
     $('#exampleModal').modal('hide')
@@ -126,7 +123,6 @@
 
   function eliminar(nombre) {
     axios.get(`http://localhost:3000/eliminar?nombre=${nombre}`).then((data) => {
-      alert(data.data)
       getData()
     })
     $('#exampleModal').modal('hide')
